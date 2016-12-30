@@ -30,7 +30,6 @@ For the purposes of this exercise, ignore auth.
 * Please provide your solution as a rails app called exercise_YYMMDD_yourname,
 sent as a zip file.
 
-
 ###### --------------------------------------------------------------------------
 
 ####  rake db:seeds - to try this app locally
