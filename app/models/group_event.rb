@@ -10,6 +10,7 @@ class GroupEvent < ApplicationRecord
   validate :stop_cannot_be_less_start, :start_cannot_be_in_the_past
   validates :published, :deleted, inclusion: { in: [true, false] }
   validates :location, :name, length: { maximum: 30 }
+  # validate :have_nils?, on: :publish_event
 
   # Markdown
 
@@ -47,18 +48,15 @@ class GroupEvent < ApplicationRecord
     self.stop = start_time + self.duration.days
   end
 
-  # special methods
-
   def delete_event
     self.update_attribute(:deleted, true)
   end
 
-
   def publish_event
-    self.update(published: true) unless have_nils?
+    self.update(published: true) unless has_nils?
   end
 
-  def have_nils?
+  def has_nils?
     self.attributes.values.include?(nil)
   end
 

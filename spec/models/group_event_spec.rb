@@ -55,18 +55,18 @@ RSpec.describe GroupEvent, type: :model do
 
   describe 'check publish: can not publish when fields are nil' do
 
-    describe 'no fields == nil - can publish' do
-      before { FactoryGirl.create(:group_event, :group_event_to_publish) }
-      let(:group_event_publish) { GroupEvent.find(3) }
-      let(:after_event_can_not_publish) { group_event.publish_event }
-
-      it ' no fields == nil - can publish' do
-        group_event_publish.publish_event
-        puts '1. no fields == nil'
-        puts "group_event - .published = #{group_event_publish.published.inspect}"
-        expect(group_event_publish.published).to eq(true)
-      end
-    end
+    # describe 'no fields == nil - can publish' do
+    #   before { FactoryGirl.create(:group_event, :group_event_to_publish) }
+    #   let(:group_event_publish) { GroupEvent.find(3) }
+    #   let(:after_event_can_not_publish) { group_event.publish_event }
+    #
+    #   it ' no fields have nil - can publish' do
+    #     group_event_publish.publish_event
+    #     puts '1. no fields == nil'
+    #     puts "group_event - .published = #{group_event_publish.published.inspect}"
+    #     expect(group_event_publish.published).to eq(true)
+    #   end
+    # end
 
   end
 

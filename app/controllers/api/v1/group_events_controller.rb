@@ -67,12 +67,10 @@ module Api::V1
     end
 
     private
-      # Use callbacks to share common setup or constraints between actions.
       def set_group_event
         @group_event = GroupEvent.find(params[:id])
       end
 
-      # Only allow a trusted parameter "white list" through.
       def group_event_params
         params.permit(:user_id, :start, :duration, :name, :location, :description)
       end
