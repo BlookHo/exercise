@@ -26,7 +26,6 @@ module Api::V1
     # PATCH/PUT /group_events/1
     def update
       if @group_event.update(group_event_params)
-        logger.info(" event.descripttion: = #{@group_event.description} ")
         render json: @group_event
       else
         render json: @group_event.errors, status: :unprocessable_entity

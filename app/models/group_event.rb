@@ -11,8 +11,7 @@ class GroupEvent < ApplicationRecord
   validates :published, :deleted, inclusion: { in: [true, false] }
   validates :location, :name, length: { maximum: 30 }
 
-  VALIDATABLE_ATTRS = GroupEvent.attribute_names - %w(id created_at updated_at markdown_description published deleted)
-  validates_presence_of VALIDATABLE_ATTRS, on: :publish
+  # Markdown
 
   class << self
     def markdown
@@ -25,6 +24,8 @@ class GroupEvent < ApplicationRecord
   def assign_markdown_description
     assign_attributes({ markdown_description: self.class.markdown.render(description) })
   end
+
+  # time managing
 
   def start_time
     self.start
@@ -46,12 +47,19 @@ class GroupEvent < ApplicationRecord
     self.stop = start_time + self.duration.days
   end
 
+  # special methods
+
   def delete_event
-      self.update_attribute(:deleted, true)
+    self.update_attribute(:deleted, true)
   end
 
+
   def publish_event
-    self.update_attribute(:published, true)
+    self.update(published: true) unless have_nils?
+  end
+
+  def have_nils?
+    self.attributes.values.include?(nil)
   end
 
 end

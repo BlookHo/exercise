@@ -55,43 +55,18 @@ RSpec.describe GroupEvent, type: :model do
 
   describe 'check publish: can not publish when fields are nil' do
 
-    # describe 'no fields == nil - can publish' do
-    #   before {
-    #     FactoryGirl.create(:group_event, :group_event_to_publish)
-    #     puts "Before: :published = #{GroupEvent.find(3).inspect}"
-    #   }
-    #   let(:group_event_publish) { GroupEvent.find(3) }
-    #
-    #   let(:after_event_can_not_publish) { group_event.publish_event }
-    #   it ' no fields == nil - can publish' do
-    #     group_event_publish.publish_event
-    #     puts '1. no fields == nil'
-    #     puts "group_event - .published = #{group_event_publish.published.inspect}"
-    #     puts "After no fields == nil  group_event.attributes = #{group_event_publish.attributes}"
-    #     expect(group_event_publish.published).to eq(true)
-    #   end
-    # end
+    describe 'no fields == nil - can publish' do
+      before { FactoryGirl.create(:group_event, :group_event_to_publish) }
+      let(:group_event_publish) { GroupEvent.find(3) }
+      let(:after_event_can_not_publish) { group_event.publish_event }
 
-    # describe 'one field == nil - can not publish' do
-    #   before {
-    #     FactoryGirl.build(:group_event, :can_not_publish_one_nil)
-    #     puts "Before: :published = #{GroupEvent.find(4).inspect}"
-    #   }
-    #   let(:group_event_publish) { GroupEvent.find(4) }
-    #
-    #   let(:after_event_can_not_publish) { group_event.publish_event }
-    #   it ' one field == nil - can not publish' do
-    #     group_event_publish.publish_event
-    #     puts '2. no fields == nil'
-    #     puts "group_event_publish = #{group_event_publish.inspect}"
-    #     puts "group_event.id = #{group_event_publish.id.inspect}"
-    #     puts "group_event.name = #{group_event_publish.name.inspect}"
-    #     puts "group_event.user_id = #{group_event_publish.user_id.inspect}"
-    #     puts "group_event - .published = #{group_event_publish.published.inspect}"
-    #     puts "After one field == nil  group_event.attributes = #{group_event_publish.attributes}"
-    #     expect(group_event_publish.published).to eq(false)
-    #   end
-    # end
+      it ' no fields == nil - can publish' do
+        group_event_publish.publish_event
+        puts '1. no fields == nil'
+        puts "group_event - .published = #{group_event_publish.published.inspect}"
+        expect(group_event_publish.published).to eq(true)
+      end
+    end
 
   end
 
