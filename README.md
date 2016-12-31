@@ -47,7 +47,7 @@ sent as a zip file.
                 "duration":1,
                 "name":"Lunch",
                 "description":"Lunch in fine restaurant near Coliseum",
-                "markdown_description":"",
+                "markdown_description":"<h4>Lunch in fine restaurant near Coliseum</h4>",
                 "location":"Rome",
                 "published":false,
                 "deleted":false
@@ -57,7 +57,7 @@ sent as a zip file.
                "duration":3,
                "name":"Weekend",
                "description":"Great weekend of the whole team",
-               "markdown_description":"",
+               "markdown_description":"<h4>Great weekend of the whole team</h4>",
                "location":"Paris",
                "published":true,
                "deleted":false
@@ -87,7 +87,7 @@ sent as a zip file.
 		  "duration": 4,
 		  "name": "Holiday",
 		  "description": "Nice and wondeful holiday",
-		  "markdown_description": null,
+		  "markdown_description": '<h4>Nice and wondeful holiday</h4>',
 		  "location": "Saint-Petersburg",
 		  "published": false,
 		  "deleted": false,
@@ -127,7 +127,7 @@ sent as a zip file.
         "stop":"2017-03-10T19:00:00.000Z",
         "duration":5,"name":"",
         "description":"Fine meeting with developers in office",
-        "markdown_description":"",
+        "markdown_description":"<h4>Fine meeting with developers in office</h4>",
         "location":"Tokyo","published":false,
         "deleted":false,"users":null}
 
@@ -143,20 +143,20 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version - 2.3.1
 
-* System dependencies
+* System dependencies - rails 5.0.1
 
-* Configuration
+* Configuration - api
 
-* Database creation
+* Database creation - Postgresql
 
-* Database initialization
+* Database initialization - databsse.yml + secrets.yml
 
-* How to run the test suite
+* How to run the test suite - bundle exec guard
 
 * Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+* Deployment instructions - yet now
 
 * ...
