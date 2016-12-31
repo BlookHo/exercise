@@ -36,8 +36,8 @@ sent as a zip file.
 
 ##  API endpoints
 
-#### 1.  get all events, created by user. Given user :id.
-####     GET http://localhost:3000/v1/users/2
+#### 1.  get one user and all events, created by user. Given user :id.
+####     GET http://localhost:3000/v1/users/2 - show one user with id=2 and all his events
 #####    Response: 
          { "user":
              { "username": "Peter" },
@@ -110,13 +110,16 @@ sent as a zip file.
 		"start":"2017-01-02T22:00:00.000Z",
 		"stop":"2017-01-22T22:00:00.000Z",
 		"duration":20,"name":"Holiday",
-		"description":"Big conference",
-		"markdown_description":"",
+		"description":"Fine meeting with developers in office [www.blog.com](my_email@google.com)!",
+		"markdown_description":"<p>Fine meeting with developers in office <a href=\"my_email@google.com\">www.blog.com</a>!</p>\n",
 		"location":"Saint-Petersburg",
 		"published":true,"deleted":false,"users":null}
 
+###### Here - markdown forrmatted field markdown_description was created - to be displayed in front end.
+
 #### 4. Standart REST calls:
-#### 4.1. GET  http://localhost:3000/v1/group_events - display all events exists
+
+#### 4.1. GET  http://localhost:3000/v1/group_events   - display all events exists
 #### 4.2. GET  http://localhost:3000/v1/group_events/4 - show one event with id=4
 #####   Response: 
         {"id":4,"user_id":1,
@@ -127,9 +130,13 @@ sent as a zip file.
         "markdown_description":"",
         "location":"Tokyo","published":false,
         "deleted":false,"users":null}
-        
 
+
+ 
 #### ----------------------------------------------------------------
+
+
+
 
 This README would normally document whatever steps are necessary to get the
 application up and running.

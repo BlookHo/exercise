@@ -14,6 +14,18 @@ class GroupEvent < ApplicationRecord
   VALIDATABLE_ATTRS = GroupEvent.attribute_names - %w(id created_at updated_at markdown_description published deleted)
   validates_presence_of VALIDATABLE_ATTRS, on: :publish
 
+  class << self
+    def markdown
+      Redcarpet::Markdown.new(Redcarpet::Render::HTML, escape_html: true)
+    end
+  end
+
+  before_save :assign_markdown_description, if: -> { description_changed? }
+
+  def assign_markdown_description
+    assign_attributes({ markdown_description: self.class.markdown.render(description) })
+  end
+
   def start_time
     self.start
   end
