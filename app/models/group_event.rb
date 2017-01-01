@@ -10,7 +10,36 @@ class GroupEvent < ApplicationRecord
   validate :stop_cannot_be_less_start, :start_cannot_be_in_the_past
   validates :published, :deleted, inclusion: { in: [true, false] }
   validates :location, :name, length: { maximum: 30 }
-  # validate :have_nils?, on: :publish_event
+
+  # time managing
+
+  def start_cannot_be_in_the_past
+    errors.add(:start, "can't be in the past") if start.present? && start <= Date.today
+  end
+
+  def stop_cannot_be_less_start
+    errors.add(:stop, "can't be less than start time") if stop.present? && stop < start
+  end
+
+  def value_stop_time
+    self.stop = start + duration.days
+  end
+
+  # delete managing
+
+  def delete_event
+    update_attribute(:deleted, true)
+  end
+
+  # publish managing
+
+  def publish_event
+    has_nils? ? self.errors.add(:base, "Event can not be published - has nil in fields") : update(published: true)
+  end
+
+  def has_nils?
+    attributes.values.include?(nil)
+  end
 
   # Markdown
 
@@ -24,40 +53,6 @@ class GroupEvent < ApplicationRecord
 
   def assign_markdown_description
     assign_attributes({ markdown_description: self.class.markdown.render(description) })
-  end
-
-  # time managing
-
-  def start_time
-    self.start
-  end
-
-  def stop_time
-    self.stop
-  end
-
-  def start_cannot_be_in_the_past
-    errors.add(:start_time, "can't be in the past") if start_time.present? && start_time <= Date.today
-  end
-
-  def stop_cannot_be_less_start
-    errors.add(:stop_time, "can't be less than start time") if stop_time.present? && stop_time < self.start
-  end
-
-  def value_stop_time
-    self.stop = start_time + self.duration.days
-  end
-
-  def delete_event
-    self.update_attribute(:deleted, true)
-  end
-
-  def publish_event
-    self.update(published: true) unless has_nils?
-  end
-
-  def has_nils?
-    self.attributes.values.include?(nil)
   end
 
 end

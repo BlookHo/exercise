@@ -132,7 +132,74 @@ sent as a zip file.
         "deleted":false,"users":null}
 
 
- 
+#### 5. GET  http://localhost:3000/v1/remove?id=3   - mark  event as deleted
+#####   Response: 
+		{
+		  "deleted_event": {
+			"deleted": true,
+			"id": 3,
+			"user_id": 1,
+			"start": "2017-02-15T10:00:00.000Z",
+			"stop": "2017-02-25T10:00:00.000Z",
+			"duration": 10,
+			"name": "Coding",
+			"description": "#### Developing of main * Back-end * Front end * Server tech in Project#22 in office",
+			"markdown_description": "<h4>Developing of main * Back-end * Front end * Server tech in Project#22 in office</h4>\n",
+			"location": "Minsk",
+			"published": false
+		  },
+		  "code": 200,
+		  "status": "success"
+		}
+		 
+
+##### If event already deleted - response:
+		{
+		  "deleted_event": [],
+		  "deleted_already": {
+			"error": "Action already done",
+			"code": 304,
+			"status": "not_modified"
+		  }
+		}
+
+
+#### 6. GET  http://localhost:3000/v1/publish?id=1   - mark  event as published 
+####         if all fields are not nil.
+
+#####   Response: 
+		{
+		  "published_event": {
+			"published": true,
+			"id": 1,
+			"user_id": 3,
+			"start": "2017-01-02T22:00:00.000Z",
+			"stop": "2017-01-06T22:00:00.000Z",
+			"duration": 4,
+			"name": "Holiday",
+			"description": "Our  Fine   meeting with developers in office [www.blog.com](my_email@google.com)!",
+			"markdown_description": "<p>Our  Fine   meeting with developers in office <a href=\"my_email@google.com\">www.blog.com</a>!</p>\n",
+			"location": "Saint-Petersburg",
+			"deleted": true
+		  },
+		  "code": 200,
+		  "status": "success"
+		}
+
+##### If event already published - response:
+		{
+		  "published_event": [],
+		  "published_already": {
+			"error": "Action already done",
+			"code": 304,
+			"status": "not_modified"
+		  }
+		}
+
+##### If event can not be published (at least one field == nil)- response:
+
+
+
 #### ----------------------------------------------------------------
 
 

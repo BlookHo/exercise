@@ -34,12 +34,10 @@ module Api::V1
 
     # GET /group_events/1
     def remove
-      if @group_event.blank?
+      if @group_event.deleted
         render json: { deleted_event: [],
-                       error: 'Blank record; check params',
-                       code: 400,
-                       status: :bad_request,
-        }
+                       deleted_already: not_modified,
+         }
       else
         @group_event.delete_event
         render json: { deleted_event: @group_event,
@@ -49,16 +47,31 @@ module Api::V1
        end
     end
 
+    def not_modified
+      { error: 'Action already done',
+        code: 304,
+        status: :not_modified
+      }
+    end
+
     # GET /group_events/1
     def publish
-      if @group_event.blank?
+      if @group_event.published
         render json: { published_event: [],
-                       error: 'Blank record; check params',
-                       code: 400,
-                       status: :bad_request,
+                       published_already: not_modified,
         }
       else
         @group_event.publish_event
+        response_publish
+      end
+    end
+
+    def response_publish
+      if @group_event.errors.size > 0
+        render json: { published_event: [],
+                       published_forbidden: @group_event.errors
+        }, except: [:created_at, :updated_at]
+      else
         render json: { published_event: @group_event,
                        code: 200,
                        status: :success,
