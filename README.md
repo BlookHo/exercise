@@ -197,8 +197,16 @@ sent as a zip file.
 		}
 
 ##### If event can not be published (at least one field == nil)- response:
-
-
+#####   GET http://localhost:3000//v1/publish?id=9
+#####   Response: 
+		{
+		  "published_event": [],
+		  "published_forbidden": {
+			"base": [
+			  "Event can not be published - has nil in fields"
+			]
+		  }
+		}
 
 #### ----------------------------------------------------------------
 
