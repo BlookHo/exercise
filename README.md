@@ -132,7 +132,7 @@ sent as a zip file.
         "deleted":false,"users":null}
 
 
-#### 5. GET  http://localhost:3000/v1/remove?id=3   - mark  event as deleted
+#### 5. DELETE  http://localhost:3000/v1/remove?id=3   - mark  event as deleted
 #####   Response: 
 		{
 		  "deleted_event": {
@@ -164,7 +164,7 @@ sent as a zip file.
 		}
 
 
-#### 6. GET  http://localhost:3000/v1/publish?id=1   - mark  event as published 
+#### 6. PUT  http://localhost:3000/v1/publish?id=1 - mark  event as published 
 ####         if all fields are not nil.
 
 #####   Response: 
@@ -210,13 +210,7 @@ sent as a zip file.
 
 #### ----------------------------------------------------------------
 
-
-
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+This application details:
 
 * Ruby version - 2.3.1
 
@@ -230,8 +224,4 @@ Things you may want to cover:
 
 * How to run the test suite - bundle exec guard
 
-* Services (job queues, cache servers, search engines, etc.)
-
 * Deployment instructions - yet now
-
-* ...

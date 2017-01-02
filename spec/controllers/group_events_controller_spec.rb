@@ -25,35 +25,28 @@ RSpec.describe Api::V1::GroupEventsController, type: :controller do
     end
   end
 
-  describe "GET #remove" do
+  describe "DELETE #remove" do
 
     before do
       FactoryGirl.create(:group_event, :group_event_to_remove)
-      puts "Before: :deleted = #{GroupEvent.find(2).deleted}"
+      puts "Before :deleted = #{GroupEvent.find(2).deleted}"
     end
 
     let(:group_event) { GroupEvent.find(2) }
     it 'change :deleted from false to true - mark event as removed' do
       get :remove, params: {id: 2}
-      puts "After remove: ['deleted_event']['deleted'] = #{JSON.parse(response.body)['deleted_event']['deleted']}"
+      puts "After :remove: 'deleted' = #{JSON.parse(response.body)['deleted_event']['deleted']}"
       expect(JSON.parse(response.body)['deleted_event']['deleted']).to eq(true)
     end
 
   end
 
-  describe "GET #publish" do
-    before do
-      puts "Before: :count = #{GroupEvent.all.count}"
-      FactoryGirl.create(:group_event, :group_event_to_publish)
-      puts "Before: :count = #{GroupEvent.all.count}"
-      puts "Before: :published = #{GroupEvent.find(3).inspect}"
-    end
+  describe "PUT #publish" do
+    before { FactoryGirl.create(:group_event, :group_event_to_publish) }
 
     let(:group_event) { GroupEvent.find(3) }
     it 'change :published from false to true - mark event as removed' do
       get :publish, params: {id: 3}
-      puts "After publish:  = #{JSON.parse(response.body)}"
-      puts "After publish: ['published_event']['published'] = #{JSON.parse(response.body)['published_event']['published']}"
       expect(JSON.parse(response.body)['published_event']['published']).to eq(true)
      end
 

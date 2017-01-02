@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe GroupEvent, type: :model do
 
+  # after {DatabaseCleaner.clean}
   describe do
     let(:group_event) { FactoryGirl.create(:group_event) }
     it 'has a valid factory' do

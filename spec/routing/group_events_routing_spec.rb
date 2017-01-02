@@ -15,16 +15,12 @@ RSpec.describe Api::V1::GroupEventsController, type: :routing do
       expect(:put => "/v1/group_events/1").to route_to("api/v1/group_events#update", :id => "1")
     end
 
-    it "routes to #update via PATCH" do
-      expect(:patch => "/v1/group_events/1").to route_to("api/v1/group_events#update", :id => "1")
-    end
-
     it "routes to #remove" do
-      expect(:get => "/v1/remove?id=2").to route_to("api/v1/group_events#remove", :id => '2')
+      expect(:delete => "/v1/remove?id=2").to route_to("api/v1/group_events#remove", :id => '2')
     end
 
     it "routes to #publish" do
-      expect(:get => "/v1/publish?id=2").to route_to("api/v1/group_events#publish", :id => '2')
+      expect(:put => "/v1/publish?id=2").to route_to("api/v1/group_events#publish", :id => '2')
     end
 
   end

@@ -1,20 +1,3 @@
-# A sample Guardfile
-# More info at https://github.com/guard/guard#readme
-
-## Uncomment and set this to only include directories you want to watch
-# directories %w(app lib config test spec features) \
-#  .select{|d| Dir.exists?(d) ? d : UI.warning("Directory #{d} does not exist")}
-
-## Note: if you are using the `directories` clause above and you are not
-## watching the project directory ('.'), then you will want to move
-## the Guardfile to a watched dir and symlink it back, e.g.
-#
-#  $ mkdir config
-#  $ mv Guardfile config/
-#  $ ln -s config/Guardfile .
-#
-# and, you'll have to watch "config/Guardfile" instead of "Guardfile"
-
 guard :bundler do
   require 'guard/bundler'
   require 'guard/bundler/verify'
@@ -27,29 +10,15 @@ guard :bundler do
   files.each { |file| watch(helper.real_path(file)) }
 end
 
-# Note: The cmd option is now required due to the increasing number of ways
-#       rspec may be run, below are examples of the most common uses.
-#  * bundler: 'bundle exec rspec'
-#  * bundler binstubs: 'bin/rspec'
-#  * spring: 'bin/rspec' (This will use spring if running and you have
-#                          installed the spring binstubs per the docs)
-#  * zeus: 'zeus rspec' (requires the server to be started separately)
-#  * 'just' rspec: 'rspec'
-
 guard :rspec, cmd: "bundle exec rspec" do
   require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
-
-  # Feel free to open issues for suggestions and improvements
 
   # RSpec files
   rspec = dsl.rspec
   watch(rspec.spec_helper) { rspec.spec_dir }
   watch(rspec.spec_support) { rspec.spec_dir }
   watch(rspec.spec_files)
-
-  # # Run the model specs related to the changed model
-  # watch(%r{^app/(.+)\.rb$})                           { |m| "spec/#{m[1]}_spec.rb" }
 
   # Ruby files
   ruby = dsl.ruby
@@ -82,19 +51,5 @@ guard :rspec, cmd: "bundle exec rspec" do
   watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$}) do |m|
     Dir[File.join("**/#{m[1]}.feature")][0] || "spec/acceptance"
   end
-
-  # # Checks any changed ruby file for code grammar
-  # # https://github.com/yujinakayama/guard-rubocop
-  # guard :rubocop, all_on_start: false, cli: ['--out', 'log/rubocop.log'] do
-  #   watch(%r{^(.+)\.rb$}) { |m| "#{m[1]}.rb" }
-  # end
-
-  # # Runs migrations on migrate files changes
-  # # https://github.com/glanotte/guard-migrate
-  # guard :migrate do
-  #   watch(%r{^db/migrate/(\d+).+\.rb})
-  #   watch('db/seeds.rb')
-  # end
-
 
 end

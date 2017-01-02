@@ -4,9 +4,8 @@ Rails.application.routes.draw do
       resources :group_events
       resources :users
 
-      match 'events_of_user',  to: 'group_events#events_of_user',  via: 'get'
-      match 'remove',          to: 'group_events#remove',          via: 'get'
-      match 'publish',         to: 'group_events#publish',         via: 'get'
+      match 'remove',          to: 'group_events#remove',          via: 'delete'
+      match 'publish',         to: 'group_events#publish',         via: 'put'
     end
   end
 end

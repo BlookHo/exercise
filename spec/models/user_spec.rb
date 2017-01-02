@@ -4,12 +4,12 @@ RSpec.describe User, type: :model do
 
   describe do
     let(:user) { FactoryGirl.create(:user) }
-    it 'has a valid factory' do
+    it 'valid factory' do
       expect(user).to be_valid
     end
   end
 
-  describe 'validation of model User' do
+  describe 'validation' do
     before { @user = User.new(username: 'Example User', email: 'user@example.com') }
 
     subject { @user }
@@ -17,12 +17,12 @@ RSpec.describe User, type: :model do
     it { should respond_to(:email) }
     it { should be_valid }
 
-    describe 'return value of authenticate method' do
+    describe 'username value' do
       before { @user.save }
       let(:found_user) { User.find_by(email: @user.email) }
 
-      describe 'with valid username' do
-        it 'username should be valid' do
+      context 'with valid username' do
+        it 'username valid' do
           expect(found_user.username).to eq('Example User')
         end
       end
@@ -30,33 +30,37 @@ RSpec.describe User, type: :model do
 
   end
 
-  describe 'when email is not present' do
+  describe 'email not present' do
     before { @user = User.new(username: 'Example User', email: ' ') }
     it { should_not be_valid }
   end
-  describe 'when username is not present' do
+
+  describe 'username not present' do
     before { @user = User.new(username: ' ', email: 'user@example.com') }
     it { should_not be_valid }
   end
-  describe 'when username is too long' do
+
+  describe 'username is too long' do
     before { @user = User.new(username: 'a' * 51, email: 'user@example.com') }
     it { should_not be_valid }
   end
-  describe 'when email have more than one dot' do
+
+  describe 'email have more than one dot' do
     before { @user = User.new(username: 'Example User', email: 'user@ex.ample.com') }
     it { should_not be_valid }
   end
-  describe 'when email have more than one dot' do
+
+  describe 'email have more than one dot - 2' do
     before { @user = User.new(username: 'Example User', email: 'u.ser@example.com') }
     it { should_not be_valid }
   end
 
-  describe 'check emails format' do
+  describe 'emails format' do
 
     before { @user = User.new(username: 'Example User2', email: 'user@example.com') }
     subject { @user }
 
-    describe 'when email format is invalid' do
+    describe 'email format is invalid' do
       it 'should be invalid' do
         addresses = %w[user@foo,com user_at_foo.org example.user@foo.
                      foo@bar_baz.com foo@bar+baz.com]
@@ -67,7 +71,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    describe 'when email format is valid' do
+    describe 'email format is valid' do
       it 'should be valid' do
         addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
         addresses.each do |valid_address|
@@ -77,7 +81,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    describe 'when email address is already taken' do
+    describe 'email address is already taken' do
       before do
         user_with_same_email = @user.dup
         user_with_same_email.email = @user.email.upcase
