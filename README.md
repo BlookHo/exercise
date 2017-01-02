@@ -32,7 +32,6 @@ sent as a zip file.
 
 ###### --------------------------------------------------------------------------
 
-####  rake db:seeds - to try this app locally
 
 ##  API endpoints
 
@@ -220,7 +219,10 @@ This application details:
 
 * Database creation - Postgresql
 
-* Database initialization - databsse.yml + secrets.yml
+* Database initialization - according databsse.yml + secrets.yml (role, createdb, password)
+#####  rake db:migrate
+#####  rake db:seeds
+
 
 * How to run the test suite - bundle exec guard
 
