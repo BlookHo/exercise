@@ -65,8 +65,8 @@ RSpec.configure do |config|
   config.filter_run_excluding disabled: true
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.strategy = :transaction   # transaction
+    DatabaseCleaner.clean_with(:truncation) # truncation
 
     begin
       DatabaseCleaner.start
@@ -77,13 +77,13 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.start
+    DatabaseCleaner.strategy = :truncation  # truncation
     # DatabaseCleaner.strategy = :transaction
   end
 
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
+  # config.before(:each) do
+  # end
 
   config.after(:each) do
     DatabaseCleaner.clean

@@ -44,14 +44,15 @@ FactoryGirl.define do
       deleted      false
     end
 
-    trait :can_not_publish_two_nils do
-      user_id     nil
-      name        nil
-      description 'Great weekend for the whole team'
+    trait :can_not_publish_one_nil do
+      description  nil
+      published    false
     end
 
-    trait :can_not_publish_one_nil do
-      user_id     3
+    trait :can_not_publish_two_nils do
+      location     nil
+      # name        nil
+      # description 'Great weekend for the whole team'
     end
 
     trait :event_stop_less_start do
