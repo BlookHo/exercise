@@ -1,5 +1,5 @@
 # README
-######--------------------------------------------------------------------------
+######---  Made by Aleksei Ivanishchev  2016  -----------------------------------------------------------------------
 
 ## Background:
 
@@ -9,8 +9,7 @@
 (and calculate the other value).
 * The event also has a
   name,
-  description (which supports formatting), ( ?? format: { with: /\A[a-zA-Z]+\z/,
-                                                  message: "only allows letters" } ?? )
+  description (which supports formatting), ( Markdown )
   location.
  
 * The event should be draft or published.
@@ -19,16 +18,15 @@
 * When the event is deleted/remove it should be kept in the database and marked as such.
 
 ## Deliverable:
+
 * Write an AR model, spec and migration for a GroupEvent
 that would meet the needs of the description above.
  
 * Then write the api controller and spec to
 support JSON request/responses to manage these GroupEvents.
 
-For the purposes of this exercise, ignore auth.
+* For the purposes of this exercise, auth is ignored.
 
-* Please provide your solution as a rails app called exercise_YYMMDD_yourname,
-sent as a zip file.
 
 ###### --------------------------------------------------------------------------
 
@@ -38,7 +36,8 @@ sent as a zip file.
 #### 1.  Standart REST calls:
 #### 1.1 get one user and all events, created by user. Given user :id.
 ####     GET http://localhost:3000/v1/users/1 - show one user with id=1 and all his events
-#####    Response: 
+#####    Response:
+
 		{
 		  "username": "Aleksei",
 		  "email": "zoneiva@gmail.com",
@@ -87,7 +86,8 @@ sent as a zip file.
 			}
 		  ]
 		}
-		
+
+
 #### 1.2 get all users:
 ####     GET http://localhost:3000/v1/users/
 #####   Response: 
@@ -126,7 +126,6 @@ sent as a zip file.
 ####     GET http://localhost:3000/v1/users/6
 #####   Response: 
 
-		
 		{
 		  "error": "No such record in Database; check params",
 		  "status": "not_found"
@@ -179,7 +178,6 @@ sent as a zip file.
 		
 		.....
 
-
 #### 1.5. GET  http://localhost:3000/v1/group_events/4 - show one event with id=4
 #####   Response: 
 
@@ -219,6 +217,7 @@ sent as a zip file.
         description:### Nice and wondeful holiday
 
 #####   Response: 
+
 		{
 		  "id": 15,
 		  "user_id": 3,
@@ -244,8 +243,9 @@ sent as a zip file.
 #####   Params: 
 		"description":"Fine meeting with developers in office [www.blog.com](my_email@google.com)!",
 		duration:20
-		
+
 #####   Response: 
+
 		{"id":7,"user_id":3,
 		"start":"2017-01-02T22:00:00.000Z",
 		"stop":"2017-01-22T22:00:00.000Z",
@@ -259,7 +259,8 @@ sent as a zip file.
 
 
 #### 5. DELETE  http://localhost:3000/v1/remove?id=3 - mark  event as deleted
-#####   Response: 
+#####   Response:
+
 		{
 		  "deleted_event": {
 			"deleted": true,
@@ -277,7 +278,6 @@ sent as a zip file.
 		  "code": 200,
 		  "status": "success"
 		}
-		 
 
 ##### If event already deleted - response:
 		{
@@ -289,11 +289,11 @@ sent as a zip file.
 		  }
 		}
 
-
 #### 6. PUT  http://localhost:3000/v1/publish?id=1 - mark  event as published 
 ####         if all fields are not nil - according to rules.
 
 #####   Response: 
+
 		{
 		  "published_event": {
 			"published": true,
@@ -313,6 +313,7 @@ sent as a zip file.
 		}
 
 ##### If event already published - response:
+
 		{
 		  "published_event": [],
 		  "published_already": {
