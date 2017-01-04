@@ -15,8 +15,8 @@ RSpec.describe Api::V1::GroupEventsController, type: :routing do
       expect(:put => '/v1/group_events/1').to route_to('api/v1/group_events#update', :id => '1')
     end
 
-    it 'routes to #remove' do
-      expect(:delete => '/v1/remove?id=2').to route_to('api/v1/group_events#remove', :id => '2')
+    it 'routes to #destroy' do
+      expect(:delete => '/v1/group_events/2').to route_to('api/v1/group_events#destroy', :id => '2')
     end
 
     it 'routes to #publish' do

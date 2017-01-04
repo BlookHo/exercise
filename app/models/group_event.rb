@@ -9,7 +9,7 @@ class GroupEvent < ApplicationRecord
   validates :duration, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
   validate :stop_cannot_be_less_start, :start_cannot_be_in_the_past
   validates :published, :deleted, inclusion: { in: [true, false] }
-  validates :location, :name, length: { maximum: 30 }
+  validates :location, :name, length: { maximum: 50 }
 
   # time managing
 

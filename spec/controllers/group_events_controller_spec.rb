@@ -24,7 +24,7 @@ RSpec.describe Api::V1::GroupEventsController, type: :controller do
     end
   end
 
-  describe 'DELETE #remove' do
+  describe 'DELETE #destroy' do
     before do
       FactoryGirl.create(:group_event, :group_event_to_remove)
       puts "\nBefore :remove: :deleted = #{GroupEvent.first.deleted}"
@@ -32,7 +32,7 @@ RSpec.describe Api::V1::GroupEventsController, type: :controller do
 
     let(:group_event) { GroupEvent.first }
     it ' mark event as removed' do
-      get :remove, params: {id: 1}
+      delete :destroy, params: {id: 1}
       puts "After :remove: 'deleted' = #{JSON.parse(response.body)['deleted_event']['deleted']}"
       expect(JSON.parse(response.body)['deleted_event']['deleted']).to eq(true)
     end

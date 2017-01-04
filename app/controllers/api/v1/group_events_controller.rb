@@ -1,6 +1,6 @@
 module Api::V1
   class GroupEventsController < ApplicationController
-    before_action :set_group_event, only: [:show, :update, :remove, :publish]
+    before_action :set_group_event, only: [:show, :update, :remove, :publish, :destroy]
 
     # GET /group_events
     def index
@@ -32,19 +32,20 @@ module Api::V1
       end
     end
 
-    # GET /group_events/1
-    def remove
+    # DELETE /group_events/1
+    # DELETE /group_events/1.json
+    def destroy
       if @group_event.deleted
         render json: { deleted_event: [],
                        deleted_already: not_modified,
-         }
+        }
       else
         @group_event.delete_event
         render json: { deleted_event: @group_event,
                        code: 200,
                        status: :success,
         }, except: [:created_at, :updated_at]
-       end
+      end
     end
 
     def not_modified
@@ -54,7 +55,7 @@ module Api::V1
       }
     end
 
-    # GET /group_events/1
+    # PUT /group_events/1
     def publish
       if @group_event.published
         render json: { published_event: [],

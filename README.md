@@ -258,7 +258,7 @@ support JSON request/responses to manage these GroupEvents.
 ###### Above - markdown forrmatted field markdown_description was created - to be displayed in front end.
 
 
-#### 5. DELETE  http://localhost:3000/v1/remove?id=3 - mark  event as deleted
+#### 5. DELETE  http://localhost:3000/v1/group_events?id=3 - mark  event as deleted
 #####   Response:
 
 		{
@@ -324,7 +324,7 @@ support JSON request/responses to manage these GroupEvents.
 		}
 
 ##### If event can not be published (at least one field == nil)- response:
-#####   GET http://localhost:3000//v1/publish?id=9
+#####   GET http://localhost:3000/v1/publish?id=9
 #####   Response: 
 		{
 		  "published_event": [],
