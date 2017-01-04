@@ -352,5 +352,8 @@ This application details:
 #####  rake db:seeds
 
 * How to run the test suite - bundle exec guard
+##### To see code tests coverage: open in browser locally http://localhost:63342/exercise_161229_Aleksei/coverage/index.html
+##### and see results
 
 * Deployment instructions - yet now
+
