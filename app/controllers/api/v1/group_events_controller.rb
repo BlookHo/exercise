@@ -1,6 +1,6 @@
 module Api::V1
   class GroupEventsController < ApplicationController
-    before_action :set_group_event, only: [:show, :update, :remove, :publish, :destroy]
+    before_action :set_group_event, only: [:show, :update, :publish, :destroy]
 
     # GET /group_events
     def index
